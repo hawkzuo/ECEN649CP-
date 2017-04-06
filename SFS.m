@@ -1,4 +1,4 @@
-function [ minErrors,outFeature,totalA,totalB ] = SFS( X,y,upperD,methodNO )
+function [ minErrors,outFeatureExpand,totalA,totalB ] = SFS( X,y,upperD,methodNO )
 %SFS Summary of this function goes here
 % This function perform the Sequential Forward Search on the given
 % data (X,y), returns upperD-dimentional arrays that contains the 
@@ -13,6 +13,7 @@ totalA=zeros(upperD,upperD);  totalB=zeros(1,upperD);
 %Initialize MinimumError;OutputFeatures;GlobalCounter;GlobalMinimumError
 minErrors = zeros(1,upperD);  
 outFeature = zeros(1,upperD);
+outFeatureExpand = zeros(upperD,upperD);
 counter = 0;
 
 if methodNO == 0
@@ -48,9 +49,9 @@ if methodNO == 0
         counter=counter+1;       
     end
 elseif methodNO == 1    
-    gMin=100;
+    %gMin=100;
     while counter < upperD 
-        
+        gMin=100;
         levelopt = -1;
         for i=1:d            
             if(sum(ismember(outFeature,i)) > 0)                
@@ -79,6 +80,10 @@ elseif methodNO == 1
     end    
  
 end
+for i=1:upperD
+    outFeatureExpand(1:i,i) = outFeature(1,1:i);
+end
+
 
 
 

@@ -29,4 +29,5 @@ mt=size(TX,1);  nt=size(TX,2);
 %Sequential forward search
 [NNerr,NNfeature]=SFS(X,y,8,1)
 %Exhaustive Search
-%[NN_err,NN_feature]=EXS(X,y,3,1)
+[NN_err,NN_feature]=EXS(X,y,3,1)
+%dldaTest(DLDA_a,DLDA_b,DLDA_feature,TX,Ty)
