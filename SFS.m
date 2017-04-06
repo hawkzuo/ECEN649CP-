@@ -1,4 +1,4 @@
-function [ totalA,totalB,minErrors,outFeature ] = SFS( X,y,upperD,methodNO )
+function [ minErrors,outFeature,totalA,totalB ] = SFS( X,y,upperD,methodNO )
 %SFS Summary of this function goes here
 % This function perform the Sequential Forward Search on the given
 % data (X,y), returns upperD-dimentional arrays that contains the 
@@ -10,11 +10,12 @@ m=size(X,1);
 d=size(X,2);
 
 totalA=zeros(upperD,upperD);  totalB=zeros(1,upperD);
+%Initialize MinimumError;OutputFeatures;GlobalCounter;GlobalMinimumError
+minErrors = zeros(1,upperD);  
+outFeature = zeros(1,upperD);
+counter = 0;
 
 if methodNO == 0
-    minErrors = zeros(1,upperD);  
-    outFeature = zeros(1,upperD);
-    counter = 0;
     gMin=100;
     while counter < upperD        
         levelopt = -1;
@@ -47,10 +48,36 @@ if methodNO == 0
         counter=counter+1;       
     end
 elseif methodNO == 1    
-    
-    
-    
-    
+    gMin=100;
+    while counter < upperD 
+        
+        levelopt = -1;
+        for i=1:d            
+            if(sum(ismember(outFeature,i)) > 0)                
+            else
+                if counter == 0
+                    newX=X(:,i);
+                else
+                    newX=X(:,[outFeature(:,1:counter),i]);
+                end     
+                Model=kNN(newX,y,3);
+                eY = kNNpredict(Model,newX);                
+                erate_i = sum(eY ~= y) / m;       
+                if erate_i <= gMin
+                    %Choice2: always choose the biggest index
+                    levelopt = i;
+                    gMin = erate_i;
+                end              
+            end
+        end        
+        if levelopt == -1
+            break
+        end
+        minErrors(counter+1)=gMin;
+        outFeature(counter+1)=levelopt;
+        counter=counter+1;       
+    end    
+ 
 end
 
 

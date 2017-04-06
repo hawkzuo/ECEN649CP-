@@ -21,8 +21,12 @@ mt=size(TX,1);  nt=size(TX,2);
 
 
 %Exhaustive Search
-[DLDA_a,DLDA_b,DLDA_err,DLDA_feature]=EXS(X,y,3,0)
+[DLDA_err,DLDA_feature,DLDA_a,DLDA_b]=EXS(X,y,3,0)
 %Sequential forward search
-[DLDAan,DLDAbn,DLDAerr,DLDAout]=SFS(X,y,8,0)
+[DLDAerr,DLDAout,DLDAan,DLDAbn]=SFS(X,y,8,0)
 
 
+%Sequential forward search
+[NNerr,NNfeature]=SFS(X,y,8,1)
+%Exhaustive Search
+%[NN_err,NN_feature]=EXS(X,y,3,1)
