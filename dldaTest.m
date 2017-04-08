@@ -2,7 +2,7 @@ function [ testerr ] = dldaTest(dA,dB,dFeatures,X,y)
 %DLDATEST 
 %  
 
-iterations = size(dA,2);
+iterations = size(dFeatures,2);
 testerr = ones(1,iterations);
 for i=1:iterations
    cura = dA(1:i,i);
