@@ -17,8 +17,10 @@ outFeatureExpand = zeros(upperD,upperD);
 counter = 0;
 
 if methodNO == 0
-    gMin=100;
-    while counter < upperD        
+    %gMin=100;
+    while counter < upperD 
+        %Choice 1: choose the min index
+        gMin=100;
         levelopt = -1;
         for i=1:d            
             if(sum(ismember(outFeature,i)) > 0)                
@@ -31,7 +33,7 @@ if methodNO == 0
                 [cura,curb]=dlda(newX,y);
                 eY = dldapredict(cura,curb,newX);
                 erate_i = sum(eY ~= y) / m;       
-                if erate_i <= gMin
+                if erate_i < gMin
                     %Choice2: always choose the biggest index
                     levelopt = i;
                     gMin = erate_i;
@@ -83,10 +85,5 @@ end
 for i=1:upperD
     outFeatureExpand(1:i,i) = outFeature(1,1:i);
 end
-
-
-
-
-
 end
 
