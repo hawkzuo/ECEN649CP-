@@ -73,6 +73,13 @@ end
 disp(kNN_brute_sel_fs)
 disp(kNN_SFS_sel_fs)
 
+%Sequential forward search
+fprintf('SVM Result:\n');
+fprintf('SVM Sequential Forward Search Result:\n');
+[SVMerr,SVMfeature]=SFS(X,y,8,2)
+%Perform on Test Data
+SVM_SFS_testerror = SVMTest(1,NNfeature,X,y,TX,Ty )
+
 
 
 

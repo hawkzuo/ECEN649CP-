@@ -1,0 +1,9 @@
+function [ md ] = SVMfit( X,y,Kernelmark )
+%SVMFIT Summary of this function goes here
+%   Detailed explanation goes here
+
+md = fitcsvm(X,y);
+if(Kernelmark == 1)
+    md = fitcs
+end
+

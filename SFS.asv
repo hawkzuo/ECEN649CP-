@@ -86,31 +86,7 @@ elseif methodNO == 2
     while counter < upperD
         gMin = 100;
         levelopt = -1;
-        for i=1:d            
-            if(sum(ismember(outFeature,i)) > 0)                
-            else
-                if counter == 0
-                    newX=X(:,i);
-                else
-                    newX=X(:,[outFeature(:,1:counter),i]);
-                end     
-                Model=SVMfit(newX,y,1);
-                eY = SVMpredict(Model,newX);                
-                erate_i = sum(eY ~= y) / m;       
-                if erate_i < gMin
-                    %Choice2: always choose the biggest index
-                    levelopt = i;
-                    gMin = erate_i;
-                end              
-            end
-        end        
-        if levelopt == -1
-            break
-        end
-        minErrors(counter+1)=gMin;
-        outFeature(counter+1)=levelopt;
-        counter=counter+1;       
-    end     
+    
     
     
     
