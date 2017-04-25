@@ -86,7 +86,9 @@ elseif methodNO == 2
     while counter < upperD
         gMin = 100;
         levelopt = -1;
-        for i=1:d            
+        fprintf('%d dimension\n',counter)
+        for i=1:d         
+            fprintf('%d sub iterations to go\n',d-i)
             if(sum(ismember(outFeature,i)) > 0)                
             else
                 if counter == 0

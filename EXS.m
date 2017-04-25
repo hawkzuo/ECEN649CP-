@@ -63,8 +63,31 @@ elseif methodNO == 1
         end
         counter=counter+1;           
     end
-    
-    
+
+elseif methodNO == 2
+    while counter <= upperD  
+        fprintf('Current iteration is %d\n',counter)
+        allP = nchoosek(Indexes,counter);
+        gMin=100;
+        if(size(allP,1) > 100000)
+            return
+        end
+        for i=1:size(allP,1)
+            fprintf('%d sub iterations to go\n',size(allP,1)-i)
+            %newX=X(:,allP(i,:));
+            Model=SVMfit(X(:,allP(i,:)),y,0);
+            eY = SVMpredict(Model,X(:,allP(i,:)));
+            erate_i = sum(eY ~= y) / m; 
+            if erate_i < gMin
+                gMin = erate_i;
+                minErrors(counter)=gMin;
+                outFeature(1:counter,counter)=allP(i,:)';
+                
+            end
+        end
+        counter=counter+1;           
+    end    
+
 end
 
 
